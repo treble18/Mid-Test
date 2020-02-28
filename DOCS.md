@@ -53,3 +53,18 @@ sudo service mysql status
 sudo service nginx start
 // nginx is running
 
+// Nginx Server Setup
+cd etc/nginx/sites-available
+sudo cp default midtest
+sudo nano midtest
+// Remove listen other than listen 80;
+// Add index.php before index.html
+// uncomment location ~ \.php$ block
+// THE PROBLEM WAS WE DIDN'T KEEP CGI COMMENTED
+// change FPM ver from 7.0 to 7.2
+// uncomment location ~ /\.ht block
+sudo nginx -t
+sudo ln -s /etc/nginx/sites-enabled/midtest etc/nginx/sites-enabled/
+sudo service nginx reload
+cd var/www/html
+sudo nano info.php
